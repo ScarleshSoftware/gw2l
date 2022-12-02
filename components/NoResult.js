@@ -4,27 +4,30 @@ import {
   RefreshControl,
   StyleSheet,
   Text,
+  SafeAreaView
 } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
 
 export default NoResult = props => {
-  return <SafeAreaView style={styles.noRes}>
-    <ScrollView style={styles.scroll}
-      refreshControl={
-        <RefreshControl
-          refreshing={props.refreshing}
-          onRefresh={props.onRefresh}
-        />}
-    >
-      <Text>No alerts</Text>
-    </ScrollView>
-  </SafeAreaView>
-}
+  return (
+    <SafeAreaView style={styles.noRes}>
+      <ScrollView style={styles.scroll}
+        refreshControl={
+          <RefreshControl
+            refreshing={props.refreshing}
+            onRefresh={props.onRefresh}
+          />}
+      >
+        <Text style={{ textAlign: 'center' }}>No alerts</Text>
+      </ScrollView>
+    </SafeAreaView>
+)}
 
 const styles = StyleSheet.create({
   noRes: {
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    flexDirection: 'column'
+    // alignItems: 'flex-start'
+
   },
   scroll: {
     alignContent: 'center',

@@ -3,7 +3,6 @@ import { View, Image, Text, StyleSheet, ImageBackground, Dimensions } from "reac
 
 export default EventRow = props => {
     const details = props.content
-
     return (
         <ImageBackground
             style={styles.image}
@@ -12,7 +11,7 @@ export default EventRow = props => {
             <View style={{...styles.screen, borderColor: details.currentlyActive ? 'yellow' : 'black'}}>
                 {details.icon && <Image source={{ uri: details.icon }} style={styles.icon} />}
                 <View style={styles.row}>
-                    <Text style={styles.time}>{details.currentlyActive ? "In progress" : details.time}</Text>
+                    <Text style={styles.time}>{details.currentlyActive ? `"In progress"\nStarted ${details.time}` : details.time}</Text>
                     <View style={styles.textRow}>
                         <Text style={styles.text}>{details.title}</Text>
                         <Text style={styles.subtitle}>{details.requirement}</Text>

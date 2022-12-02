@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from "react-native";
-import { SafeAreaView } from 'react-navigation';
-import { todayDailies, tomorrowDailies } from '../context/actions/dailies';
+import { View, SafeAreaView, FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import { getTomorrowDailies } from '../context/reducers/dailies';
 import NoResult from '../components/NoResult';
 import Colors from '../constants/Colors';
 import StandardRow from '../components/dailies/StandardRow';
-import testData from '../models/test/testData';
 
 const getRow = (item) => {
     return <StandardRow content={item.item} />
@@ -23,7 +21,7 @@ export default Tomorries = props => {
         setError(false);
         try {
             setIsRefreshing(true);
-            await dispatch(tomorrowDailies());
+            await dispatch(getTomorrowDailies());
             setIsLoading(false)
             setIsRefreshing(false)
         } catch (err) {
@@ -37,12 +35,6 @@ export default Tomorries = props => {
         setIsLoading(true);
         loadDailies();
     }, [dispatch, loadDailies]);
-
-    // if (error) {
-    //     return (
-    //         <TryAgain title="Try again" onPress={loadHeats} />
-    //     )
-    // }
 
     if (loading) {
         return <View style={styles.screen}>

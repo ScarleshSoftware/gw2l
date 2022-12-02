@@ -27,7 +27,7 @@ export default (firstSpawns, descriptions, durations, backPics, hasTimeBetween) 
             })
         }
         currentTime += (durations[i][0] * 60) + (hasTimeBetween[i][0] * 60)
-        const j = 1;
+        let j = 1;
         while (tomorrow >= currentTime) {
             if (moment().unix() <= currentTime)
                 listEvents.push({

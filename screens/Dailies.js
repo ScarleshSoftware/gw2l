@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
-import { SafeAreaView } from 'react-navigation';
-import { todayDailies } from '../context/actions/dailies';
+import { SafeAreaView, View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import { getTodayDailies } from '../context/reducers/dailies';
 import NoResult from '../components/NoResult';
 import Colors from '../constants/Colors';
 import StandardRow from '../components/dailies/StandardRow';
@@ -22,7 +21,7 @@ export default Dailies = props => {
         setError(false);
         try {
             setIsRefreshing(true);
-            await dispatch(todayDailies());
+            dispatch(getTodayDailies());
             setIsLoading(false)
             setIsRefreshing(false)
         } catch (err) {

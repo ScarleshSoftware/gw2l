@@ -3,7 +3,6 @@ import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
 
 export default StandardRow = props => {
     const details = props.content
-
     return (
         <ImageBackground
             style={styles.image}
@@ -41,12 +40,13 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'blue'
     },
     subtitle: {
         textAlign: 'center',
         fontSize: 11,
-
+        color: 'blue'
     },
     image: {
         resizeMode: "cover",

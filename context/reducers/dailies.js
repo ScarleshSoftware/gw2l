@@ -1,28 +1,35 @@
-import { GET_DETAILS_DAILIES, GET_TODAY_DAILIES, GET_TOMORROW_DAILIES } from "../actions/dailies"
-
+import { detailedDailies, todayDailies, tomorrowDailies } from '../actions/dailies';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
     today: null,
     tomorrow: null,
     details: null,
 }
 
-
-export default dailiesReducers = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_TODAY_DAILIES:
-            if (state.today !== action.today)
-                return { ...state, today: action.today }
-            return state;
-        case GET_TOMORROW_DAILIES:
-            if (state.tomorrow !== action.tomorrow)
-                return { ...state, tomorrow: action.tomorrow }
-            return state;
-        case GET_DETAILS_DAILIES:
-            if (state.details !== action.details){
-                return { ...state, details: action.details }
-            }
-            return state;
-        default:
-            return state;
+const dailiesReducers = createSlice({
+    name: 'Dailies',
+    initialState: initialState,
+    reducers: {},
+    extraReducers(builder) {
+        builder.addCase(getTodayDailies.fulfilled, (state, action) => {
+          state.today = JSON.parse(action.payload)
+        })
+        builder.addCase(getTomorrowDailies.fulfilled, (state, action) => {
+          state.tomorrow = JSON.parse(action.payload)
+        })
+        builder.addCase(getDetailsDailies.fulfilled, (state, action) => {
+          state.details = action.payload
+        })
     }
-}
+})
+
+export const getTodayDailies = createAsyncThunk('dailies/today', async () => {
+    return JSON.stringify(await todayDailies())
+});
+export const getTomorrowDailies = createAsyncThunk('dailies/tomorrow', async () => {
+    return JSON.stringify(await tomorrowDailies())
+});
+export const getDetailsDailies = createAsyncThunk('dailies/details', async () => {
+    return JSON.stringify(await detailedDailies())
+});
+export default dailiesReducers.reducer;

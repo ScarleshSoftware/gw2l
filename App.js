@@ -1,21 +1,17 @@
 import React from 'react';
-import dailiesReducers from './context/reducers/dailies';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { StyleSheet } from "react-native";
+import {NavigationContainer} from '@react-navigation/native';
 import GwNavigator from './navigation/Navigator';
-import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import ReduxThunk from 'redux-thunk';
-
-const rootReducers = combineReducers({
-  dailies: dailiesReducers,
-})
-const store = createStore(rootReducers, applyMiddleware(ReduxThunk));
+import {store} from './context/reducers/store';
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <GwNavigator />
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <GwNavigator />
+      </Provider>
+    </NavigationContainer>
   );
 }
 
