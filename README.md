@@ -1,5 +1,5 @@
 # gw2l-react
-![GW 2l](assets\icon.png "App Icon")
+![GW 2l](assets/icon.png "App Icon")
 
 ## SETUP
 
