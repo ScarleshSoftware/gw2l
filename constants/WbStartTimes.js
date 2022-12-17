@@ -86,6 +86,22 @@ const descriptions = [
 
 const durations = Array.from({ length: firstSpawns.length }, () => [15])
 
+const hasSubEvents = [
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+]
+
 let hasTimeBetween = [
     [180],
     [120],
@@ -109,5 +125,5 @@ hasTimeBetween.forEach((_, i, arr) => {
 })
 
 export const createEvents = async () => {
-    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween)
+    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween, hasSubEvents)
 }

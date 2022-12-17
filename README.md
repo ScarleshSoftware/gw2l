@@ -22,3 +22,16 @@ In case, like I do, forget to update `expo` (curently v.47.0.0):
 ```sh
 expo update
 ```
+
+## Build
+
+Make sure you log in in `eas`, and that `eas` is installed:
+```sh
+npm install -g eas-cli
+eas login
+eas build:configure
+```
+Then a build can be created.
+```
+eas build --platform android
+```

@@ -57,6 +57,17 @@ const durations = [
     [15, 15],
 ]
 
+const hasSubEvents = [
+    [false, false],
+    [false],
+    [false, false],
+    [false, false, false],
+    [false, false, false],
+    [false],
+    [false, false],
+    [false, false],
+]
+
 const hasTimeBetween = [
     [0, 95],
     [100],
@@ -80,5 +91,5 @@ const descriptions = [
 ]
 
 export const createEvents = async () => {
-    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween)
+    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween, hasSubEvents)
 }

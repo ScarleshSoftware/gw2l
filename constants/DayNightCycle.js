@@ -20,11 +20,12 @@ const durations = [
 
 const hasTimeBetween = Array.from({ length: firstSpawns.length }, () => [0])
 
+const hasSubEvents = Array.from({ length: firstSpawns.length }, () => [false])
+
 const descriptions = [
     ["Dawn", "Day", "Dusk", "Night"],
 ]
 
 export const getCurrentEvent = async () => {
-    const upcomingEvents = eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween)
-    return upcomingEvents
+    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween, hasSubEvents)
 }

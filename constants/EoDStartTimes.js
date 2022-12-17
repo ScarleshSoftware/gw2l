@@ -21,6 +21,13 @@ const allTheMaps = [
     "Seitung Province", "New Kaineng City", "The Echovald Wilds", "Dragon's End"
 ]
 
+const preparationSubEvent = {
+    "durations": [8, 8],
+    "descriptions": ["Jade Maw", "Jade Maw"],
+    "hasTimeBetween": [32, 7],
+    "startDelta": 5
+}
+
 const backPics = [
     require('../assets/choya.png'),
     require('../assets/highlands.png'),
@@ -46,6 +53,13 @@ const hasTimeBetween = [
     [0, 0],
 ]
 
+const hasSubEvents = [
+    [false],
+    [false],
+    [false, false],
+    [preparationSubEvent, false],
+]
+
 const descriptions = [
     ["Aetherblade Assault"],
     ["Kaineng Blackout"],
@@ -54,5 +68,5 @@ const descriptions = [
 ]
 
 export const createEvents = async () => {
-    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween)
+    return eventCreator(firstSpawns, descriptions, durations, backPics, hasTimeBetween, hasSubEvents)
 }
