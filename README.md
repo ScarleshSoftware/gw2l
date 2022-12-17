@@ -1,4 +1,5 @@
 # gw2l-react
+![GW 2l](assets\icon.png "App Icon")
 
 ## SETUP
 
@@ -9,29 +10,21 @@
 Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope LocalMachine
 ```
 - For VSCode: `Ctrl + P` and write ``ext install npm script runner`` otherwise it won't be able to use npm in its integrated terminal
-- Install expo globally `npm install --global expo-cli`
+- Install expo globally `npm install -g react-native-cli`
 
 
 ## Dev
-
-```sh
-npm start
+Create a `local.properties` under the android folder
+```.properties
+sdk.dir = C:\\Users\\USERNAME\\AppData\\Local\\Android\\sdk
+ndk.dir = C:\\Users\\USERNAME\\AppData\\Local\\Android\\sdk\\ndk\\NDS_VERSION
 ```
-
-In case, like I do, forget to update `expo` (curently v.47.0.0):
 ```sh
-expo update
+npm run android
+# or
+npm run web
 ```
 
 ## Build
 
-Make sure you log in in `eas`, and that `eas` is installed:
-```sh
-npm install -g eas-cli
-eas login
-eas build:configure
-```
-Then a build can be created.
-```
-eas build --platform android
-```
+Need to be updated...
