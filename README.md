@@ -27,4 +27,14 @@ npm run web
 
 ## Build
 
-Need to be updated...
+```sh
+cd android
+./gradlew bundleRelease
+```
+The generated `aab` can be found in `android/app/build/outputs/bundle/release/app-release.aab`.
+
+
+This can also double checked with react-native`'s feature:
+```sh
+npx react-native run-android --variant=release
+```
