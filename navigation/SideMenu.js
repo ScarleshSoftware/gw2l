@@ -1,4 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { AntDesign } from '@expo/vector-icons'; 
 import Colors from "../constants/Colors";
 import navStyles from "./CommonStyles";
 import Home from '../screens/Home';
@@ -9,6 +10,8 @@ import IbsMetaEvents from '../screens/IbsMetaEvents';
 import EoDMetaEvents from '../screens/EoDMetaEvents';
 import TomorrowPageNavigator from './TomorrowDailiesNavigation';
 import TodayPageNavigator from './TodayDailiesNavigation';
+import { Image } from 'react-native';
+import DrawerCloset from '../components/DrawerCloset';
 
 const DrawerStack = createDrawerNavigator();
 export default function DrawerNavigator() {
@@ -29,10 +32,8 @@ export default function DrawerNavigator() {
                 component={Home}
                 options={{
                     headerShown: false,
-                    tabBarLabel: "Home",
-                    tabBarIcon: (tabInfo) => {
-                        return <AntDesign name='home' size={25}
-                            color={tabInfo.tintColor} />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Home" icon={require('../assets/icons/home_icon.png')} {...labelInfo}/>
                     },
                     tabBarColor: Colors.blue,
                 }}
@@ -41,38 +42,26 @@ export default function DrawerNavigator() {
                 name="Today"
                 component={TodayPageNavigator}
                 options={{
-                    tabBarLabel: "Dailies",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
-                            resizeMode="contain" />
-                    },
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Dailies" icon={require('../assets/daily_bottom.png')} {...labelInfo}/>
+                    }
                 }}
             />
             <DrawerStack.Screen
                 name="Tomorrow"
                 component={TomorrowPageNavigator}
                 options={{
-                    tabBarLabel: "Tomorries",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
-                            resizeMode="contain" />
-                    },
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Tomorries" icon={require('../assets/daily_bottom.png')}/>
+                    }
                 }}
             />
             <DrawerStack.Screen
                 name="HoT"
                 component={HoTMetaEvents}
                 options={{
-                    tabBarLabel: "Heart of Thorns",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/hot-logo.png')}
-                            resizeMode="contain" />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Heart of Thorns" icon={require('../assets/hot-logo.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}
@@ -81,12 +70,8 @@ export default function DrawerNavigator() {
                 name="PoF"
                 component={PofMetaEvents}
                 options={{
-                    tabBarLabel: "Path of Fire",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/pof-logo.png')}
-                            resizeMode="contain" />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Path of Fire" icon={require('../assets/pof-logo.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}
@@ -95,12 +80,8 @@ export default function DrawerNavigator() {
                 name="IBs"
                 component={IbsMetaEvents}
                 options={{
-                    tabBarLabel: "Icebrood Saga",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/ibs.png')}
-                            resizeMode="contain" />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Icebrood Saga" icon={require('../assets/ibs.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}
@@ -109,12 +90,8 @@ export default function DrawerNavigator() {
                 name="EoD"
                 component={EoDMetaEvents}
                 options={{
-                    tabBarLabel: "End of Dragons",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/eod-logo.png')}
-                            resizeMode="contain" />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="End of Dragons" icon={require('../assets/eod-logo.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}
@@ -123,12 +100,8 @@ export default function DrawerNavigator() {
                 name="Bosses"
                 component={WorldBosses}
                 options={{
-                    tabBarLabel: "World Bosses",
-                    tabBarIcon: (tabInfo) => {
-                        return <Image 
-                            style={navStyles.picAsIcons}
-                            source={require('../assets/boss-icon.png')}
-                            resizeMode="contain" />
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="World Bosses" icon={require('../assets/boss-icon.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}

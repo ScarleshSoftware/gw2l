@@ -1,5 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Image } from "react-native";
+import { Image, Animated } from "react-native";
+import TabLabel from '../components/TabLabel';
 import Dailies from "../screens/Dailies";
 import navStyles from "./CommonStyles";
 
@@ -15,7 +16,9 @@ export default function TodayPageNavigator() {
                 name="pve_main" component={Dailies}
                 initialParams={{ dailyCat: "pve" }}
                 options={{
-                    tabBarLabel: "PvE",
+                    tabBarLabel: (tabLabelInfo) => {
+                        return <TabLabel text="PvE" active={tabLabelInfo.focused}/>
+                    },
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}
@@ -29,11 +32,13 @@ export default function TodayPageNavigator() {
                 name="fractals_main" component={Dailies}
                 initialParams={{ dailyCat: "fractals" }}
                 options={{
-                    tabBarLabel: "Fractals",
+                    tabBarLabel: (tabLabelInfo) => {
+                        return <TabLabel text="Fractals" active={tabLabelInfo.focused}/>
+                    },
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
+                            source={require('../assets/icons/fractals_daily.png')}
                             resizeMode="contain" />
                     },
                     tabBarColor: navStyles.tabBarColor
@@ -43,11 +48,13 @@ export default function TodayPageNavigator() {
                 name="pvp_main" component={Dailies}
                 initialParams={{ dailyCat: "pvp" }}
                 options={{
-                    tabBarLabel: "PvP",
+                    tabBarLabel: (tabLabelInfo) => {
+                        return <TabLabel text="PvP" active={tabLabelInfo.focused}/>
+                    },
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
+                            source={require('../assets/icons/pvp_daily.png')}
                             resizeMode="contain" />
                     },
                     tabBarColor: navStyles.tabBarColor
@@ -57,11 +64,13 @@ export default function TodayPageNavigator() {
                 name="wvw_main" component={Dailies}
                 initialParams={{ dailyCat: "wvw" }}
                 options={{
-                    tabBarLabel: "WvW",
+                    tabBarLabel: (tabLabelInfo) => {
+                        return <TabLabel text="WvW" active={tabLabelInfo.focused}/>
+                    },
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
+                            source={require('../assets/icons/wvw_daily.png')}
                             resizeMode="contain" />
                     },
                     tabBarColor: navStyles.tabBarColor
@@ -71,11 +80,13 @@ export default function TodayPageNavigator() {
                 name="extra_main" component={Dailies}
                 initialParams={{ dailyCat: "extra" }}
                 options={{
-                    tabBarLabel: "Other",
+                    tabBarLabel: (tabLabelInfo) => {
+                        return <TabLabel text="Others" active={tabLabelInfo.focused}/>
+                    },
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}
-                            source={require('../assets/daily_bottom.png')}
+                            source={require('../assets/icons/extra_daily.png')}
                             resizeMode="contain" />
                     },
                     tabBarColor: navStyles.tabBarColor
