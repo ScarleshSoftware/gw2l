@@ -16,7 +16,7 @@ export default Dailies = props => {
     const [loading, setIsLoading] = useState(true)
     const [isRefreshing, setIsRefreshing] = useState(false)
     const [error, setError] = useState()
-    const dailiesID = useSelector(state => state.dailies.today);
+    const dailiesID = useSelector(state => state.dailies.today)[props.route.params.dailyCat];
     const loadDailies = useCallback(async () => {
         setError(false);
         try {
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     flatlist: {
-        marginTop: "10%",
         flex: 1,
         alignContent: 'center',
         flexDirection: 'row',
+        backgroundColor: Colors.background
     },
     screen: {
         justifyContent: 'center',
