@@ -35,4 +35,4 @@ jobs:
         key_alias: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
         # Key password
         key_password: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
-        gradlew_dir: ./android/
+        gradlew_dir: android
