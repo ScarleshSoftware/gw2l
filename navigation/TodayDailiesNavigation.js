@@ -6,7 +6,7 @@ import navStyles from "./CommonStyles";
 
 
 const DailyPageStack = createMaterialTopTabNavigator();
-export default function TomorriesPageNagigator() {
+export default function TomorriesPageNavigator() {
     return (
         <DailyPageStack.Navigator
             initialRouteName='pve_main'
