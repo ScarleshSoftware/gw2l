@@ -21,14 +21,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: debug
-      run: ls && pwd
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Generating keystore file
-      run: ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > app/EternalAlchemy.keystore
-    - name: Build with Gradle
-      run: ./gradlew build
     - name: Build Signed APK (Maybe unnecessary)
       if: always()
       # You may pin to the exact commit or the version.
@@ -43,3 +35,4 @@ jobs:
         key_alias: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
         # Key password
         key_password: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
+        gradlew_dir: ./android/
