@@ -30,6 +30,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Build Signed APK (Maybe unnecessary)
+      if: always()
       # You may pin to the exact commit or the version.
       # uses: victorbnl/build-signed-apk@131e59d4deaf2fb9d2aadb555b2ac131affeef5f
       uses: victorbnl/build-signed-apk@v1.0.0
