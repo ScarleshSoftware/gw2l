@@ -7,6 +7,11 @@ on:
     branches:
       - master
       - develop
+env:
+  GW2L_UPLOAD_STORE_FILE: 'app/EternalAlchemy.keystore'
+  GW2L_UPLOAD_STORE_PASSWORD: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
+  GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
+  GW2L_UPLOAD_KEY_PASSWORD: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
@@ -23,6 +28,8 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
+      - name: Generating keystore file
+        run: ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
           cd android
