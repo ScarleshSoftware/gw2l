@@ -57,6 +57,7 @@ project.xcworkspace
 #
 build/
 .idea
+!android/gradle/wrapper/gradle-wrapper.jar
 local.properties
 *.iml
 *.hprof
