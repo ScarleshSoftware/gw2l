@@ -10,11 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./android
     steps:
     - uses: actions/checkout@v3
-    - name: Cding
-      run: cd android
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -24,18 +24,18 @@ jobs:
     - name: debug
       run: ls && pwd
     - name: Grant execute permission for gradlew
-      run: chmod +x android/gradlew
+      run: chmod +x gradlew
     - name: Generating keystore file
-      run: ${ANDROID_STORE_KEY} | base64 -d > android/app/EternalAlchemy.keystore
+      run: ${ANDROID_STORE_KEY} | base64 -d > app/EternalAlchemy.keystore
     - name: Build with Gradle
-      run: ./android/gradlew build
+      run: ./gradlew build
     - name: Build Signed APK (Maybe unnecessary)
       # You may pin to the exact commit or the version.
       # uses: victorbnl/build-signed-apk@131e59d4deaf2fb9d2aadb555b2ac131affeef5f
       uses: victorbnl/build-signed-apk@v1.0.0
       with:
         # Keystore file encoded as base64
-        keystore: android/app/EternalAlchemy.keystore
+        keystore: app/EternalAlchemy.keystore
         # Keystore file password
         keystore_password: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
         # Key alias
