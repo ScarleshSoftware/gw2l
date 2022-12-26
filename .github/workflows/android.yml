@@ -24,18 +24,18 @@ jobs:
     - name: debug
       run: ls && pwd
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x android/gradlew
     - name: Generating keystore file
-      run: ${ANDROID_STORE_KEY} | base64 -d > app/EternalAlchemy.keystore
+      run: ${ANDROID_STORE_KEY} | base64 -d > android/app/EternalAlchemy.keystore
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./android/gradlew build
     - name: Build Signed APK (Maybe unnecessary)
       # You may pin to the exact commit or the version.
       # uses: victorbnl/build-signed-apk@131e59d4deaf2fb9d2aadb555b2ac131affeef5f
       uses: victorbnl/build-signed-apk@v1.0.0
       with:
         # Keystore file encoded as base64
-        keystore: app/EternalAlchemy.keystore
+        keystore: android/app/EternalAlchemy.keystore
         # Keystore file password
         keystore_password: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
         # Key alias
