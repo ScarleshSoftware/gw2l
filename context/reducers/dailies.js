@@ -1,8 +1,8 @@
 import { detailedDailies, todayDailies, tomorrowDailies } from '../actions/dailies';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
-    today: null,
-    tomorrow: null,
+    today: {"pve": null, "fractals": null, "wvw": null, "pvp": null},
+    tomorrow: {"pve": null, "fractals": null, "wvw": null, "pvp": null},
     details: null,
 }
 

@@ -1,10 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet } from "react-native";
+import { Image } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AntDesign } from '@expo/vector-icons'; 
 import Colors from "../constants/Colors";
-import Dailies from "../screens/Dailies";
 import MetaEvents from "../screens/HoTMetaEvents";
 import Tomorries from "../screens/Tomorries";
 import Home from '../screens/Home';
@@ -13,13 +12,9 @@ import PofMetaEvents from '../screens/PofMetaEvents';
 import WorldBosses from '../screens/WorldBosses';
 import IbsMetaEvents from '../screens/IbsMetaEvents';
 import EoDMetaEvents from '../screens/EoDMetaEvents';
-
-const styles = StyleSheet.create({
-    picAsIcons: {
-        width: "100%",
-        height: "100%"
-    }
-})
+import DailyPageNagigator from './TomorrowDailiesNavigation';
+import TomorriesPageNagigator from './TodayDailiesNavigation';
+import navStyles from "./CommonStyles";
 
 const TabNavigatorStack = createMaterialBottomTabNavigator()
 function TabNavigator() {
@@ -29,7 +24,7 @@ function TabNavigator() {
                 activeTintColor: Colors.green,
                 shifting: true,
                 labeled: false,
-                barStyle: { backgroundColor: '#694fad' },
+                barStyle: navStyles.barStyles
             }}
         >
             <TabNavigatorStack.Screen
@@ -46,30 +41,28 @@ function TabNavigator() {
             />
             <TabNavigatorStack.Screen
                 name="Today"
-                component={Dailies}
+                component={DailyPageNagigator}
                 options={{
                     tabBarLabel: "Dailies",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/daily_bottom.png')}
                             resizeMode="contain" />
                     },
-                    tabBarColor: Colors.blue,
                 }}
             />
             <TabNavigatorStack.Screen
                 name="Tomorrow"
-                component={Tomorries}
+                component={TomorriesPageNagigator}
                 options={{
                     tabBarLabel: "Tomorries",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
-                            source={require('../assets/tomorries_bottom.png')}
+                            style={navStyles.picAsIcons}
+                            source={require('../assets/daily_bottom.png')}
                             resizeMode="contain" />
                     },
-                    tabBarColor: Colors.blue,
                 }}
             />
             <TabNavigatorStack.Screen
@@ -79,7 +72,7 @@ function TabNavigator() {
                     tabBarLabel: "Heart of Thorns",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/hot-logo.png')}
                             resizeMode="contain" />
                     },
@@ -93,7 +86,7 @@ function TabNavigator() {
                     tabBarLabel: "Path of Fire",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/pof-logo.png')}
                             resizeMode="contain" />
                     },
@@ -107,7 +100,7 @@ function TabNavigator() {
                     tabBarLabel: "Icebrood Saga",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/ibs.png')}
                             resizeMode="contain" />
                     },
@@ -121,7 +114,7 @@ function TabNavigator() {
                     tabBarLabel: "End of Dragons",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/eod-logo.png')}
                             resizeMode="contain" />
                     },
@@ -135,7 +128,7 @@ function TabNavigator() {
                     tabBarLabel: "World Bosses",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
-                            style={styles.picAsIcons}
+                            style={navStyles.picAsIcons}
                             source={require('../assets/boss-icon.png')}
                             resizeMode="contain" />
                     },
