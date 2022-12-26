@@ -1,19 +1,18 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Image } from "react-native";
-import Colors from "../constants/Colors";
-import Tomorries from "../screens/Tomorries";
+import Dailies from "../screens/Dailies";
 import navStyles from "./CommonStyles";
 
 
 const DailyPageStack = createMaterialTopTabNavigator();
-export default function TomorriesPageNavigator() {
+export default function TodayPageNavigator() {
     return (
         <DailyPageStack.Navigator
             initialRouteName='pve_main'
             screenOptions={navStyles.screenOptions}
         >
             <DailyPageStack.Screen
-                name="pve_main" component={Tomorries}
+                name="pve_main" component={Dailies}
                 initialParams={{ dailyCat: "pve" }}
                 options={{
                     tabBarLabel: "PvE",
@@ -27,7 +26,7 @@ export default function TomorriesPageNavigator() {
                 }}
             />
             <DailyPageStack.Screen
-                name="fractals_main" component={Tomorries}
+                name="fractals_main" component={Dailies}
                 initialParams={{ dailyCat: "fractals" }}
                 options={{
                     tabBarLabel: "Fractals",
@@ -41,7 +40,7 @@ export default function TomorriesPageNavigator() {
                 }}
             />
             <DailyPageStack.Screen
-                name="pvp_main" component={Tomorries}
+                name="pvp_main" component={Dailies}
                 initialParams={{ dailyCat: "pvp" }}
                 options={{
                     tabBarLabel: "PvP",
@@ -55,10 +54,24 @@ export default function TomorriesPageNavigator() {
                 }}
             />
             <DailyPageStack.Screen
-                name="wvw_main" component={Tomorries}
+                name="wvw_main" component={Dailies}
                 initialParams={{ dailyCat: "wvw" }}
                 options={{
                     tabBarLabel: "WvW",
+                    tabBarIcon: (tabInfo) => {
+                        return <Image 
+                            style={navStyles.picAsIcons}
+                            source={require('../assets/daily_bottom.png')}
+                            resizeMode="contain" />
+                    },
+                    tabBarColor: navStyles.tabBarColor
+                }}
+            />
+            <DailyPageStack.Screen
+                name="extra_main" component={Dailies}
+                initialParams={{ dailyCat: "extra" }}
+                options={{
+                    tabBarLabel: "Other",
                     tabBarIcon: (tabInfo) => {
                         return <Image 
                             style={navStyles.picAsIcons}

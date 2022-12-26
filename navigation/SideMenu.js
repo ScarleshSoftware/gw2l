@@ -7,8 +7,8 @@ import PofMetaEvents from '../screens/PofMetaEvents';
 import WorldBosses from '../screens/WorldBosses';
 import IbsMetaEvents from '../screens/IbsMetaEvents';
 import EoDMetaEvents from '../screens/EoDMetaEvents';
-import DailyPageNavigator from './TomorrowDailiesNavigation';
-import TomorriesPageNavigator from './TodayDailiesNavigation';
+import TomorrowPageNavigator from './TomorrowDailiesNavigation';
+import TodayPageNavigator from './TodayDailiesNavigation';
 
 const DrawerStack = createDrawerNavigator();
 export default function DrawerNavigator() {
@@ -39,7 +39,7 @@ export default function DrawerNavigator() {
             />
             <DrawerStack.Screen
                 name="Today"
-                component={DailyPageNavigator}
+                component={TodayPageNavigator}
                 options={{
                     tabBarLabel: "Dailies",
                     tabBarIcon: (tabInfo) => {
@@ -52,7 +52,7 @@ export default function DrawerNavigator() {
             />
             <DrawerStack.Screen
                 name="Tomorrow"
-                component={TomorriesPageNavigator}
+                component={TomorrowPageNavigator}
                 options={{
                     tabBarLabel: "Tomorries",
                     tabBarIcon: (tabInfo) => {

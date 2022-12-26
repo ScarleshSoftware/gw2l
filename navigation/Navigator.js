@@ -19,11 +19,6 @@ function GwNavigator(){
                 options={{ headerShown: false }}
             />
             <GwNavigatorStack.Screen 
-                name="Tomorries"
-                component={Tomorries}
-                options={{ headerShown: false }}
-            />
-            <GwNavigatorStack.Screen 
                 name="Meta"
                 component={MetaEvents}
                 options={{ headerShown: false }}

@@ -1,8 +1,10 @@
 import { detailedDailies, todayDailies, tomorrowDailies } from '../actions/dailies';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import getCurrentDaily from '../../helpers/dailyCycleNonApi'
+
 const initialState = {
-    today: {"pve": null, "fractals": null, "wvw": null, "pvp": null},
-    tomorrow: {"pve": null, "fractals": null, "wvw": null, "pvp": null},
+    today: {"pve": null, "fractals": null, "wvw": null, "pvp": null, "extra": null},
+    tomorrow: {"pve": null, "fractals": null, "wvw": null, "pvp": null, "extra": null},
     details: null,
 }
 
@@ -24,12 +26,16 @@ const dailiesReducers = createSlice({
 })
 
 export const getTodayDailies = createAsyncThunk('dailies/today', async () => {
-    return JSON.stringify(await todayDailies())
+  let apiDailies = await todayDailies()
+  apiDailies["extra"] = getCurrentDaily()
+  return JSON.stringify(apiDailies)
 });
 export const getTomorrowDailies = createAsyncThunk('dailies/tomorrow', async () => {
-    return JSON.stringify(await tomorrowDailies())
+  let apiDailies = await tomorrowDailies()
+  apiDailies["extra"] = getCurrentDaily(1)
+  return JSON.stringify(apiDailies)
 });
 export const getDetailsDailies = createAsyncThunk('dailies/details', async () => {
-    return JSON.stringify(await detailedDailies())
+  return JSON.stringify(await detailedDailies())
 });
 export default dailiesReducers.reducer;
