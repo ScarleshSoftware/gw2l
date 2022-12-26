@@ -36,7 +36,7 @@ jobs:
       uses: victorbnl/build-signed-apk@v1.0.0
       with:
         # Keystore file encoded as base64
-        keystore: app/EternalAlchemy.keystore
+        keystore: ${{ secrets.ANDROID_STORE_KEY }}
         # Keystore file password
         keystore_password: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
         # Key alias
