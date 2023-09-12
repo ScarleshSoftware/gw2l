@@ -32,6 +32,9 @@ jobs:
       - name: Generating keystore file
         run: |
           cd android
+          echo "Printing encoded key"
+          echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d
+          ls app
           echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
