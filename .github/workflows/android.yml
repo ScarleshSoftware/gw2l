@@ -15,22 +15,27 @@ env:
   GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
   GW2L_UPLOAD_KEY_PASSWORD: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
 jobs:
-  install-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install npm dependencies
-        run: |
-          npm install
+  # install-and-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install npm dependencies
+  #       run: |
+  #         npm install
   build-android:
     defaults:
       run:
         shell: bash
         working-directory: android
-    needs: install-and-test
+    # needs: install-and-test
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v3
+
+      - uses: actions/checkout@v4
+      - name: Check dir structure
+        run: |
+          ls -la
+          pwd
       # - name: Install npm dependencies
       #   run: |
       #     npm install
