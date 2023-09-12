@@ -39,9 +39,9 @@ jobs:
       - name: Check dir structure
         run: |
           mkdir -p app/build/outputs/apk/release
-      # - name: Install npm dependencies
-      #   run: |
-      #     npm install
+      - name: Install npm dependencies
+        run: |
+          npm install
       # - uses: r0adkll/sign-android-release@v1
       #   name: Sign app APK
       #   # ID used to access action output

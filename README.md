@@ -28,6 +28,7 @@ npm run web
 ## Build
 
 ```sh
+set -o allexport; source .env; set +o allexport
 cd android
 ./gradlew bundleRelease
 ```
