@@ -38,7 +38,7 @@ export default function DrawerNavigator() {
                     tabBarColor: Colors.blue,
                 }}
             />
-            <DrawerStack.Screen
+            {/* <DrawerStack.Screen
                 name="Today"
                 component={TodayPageNavigator}
                 options={{
@@ -55,7 +55,7 @@ export default function DrawerNavigator() {
                         return <DrawerCloset text="Tomorries" icon={require('../assets/daily_bottom.png')}/>
                     }
                 }}
-            />
+            /> */}
             <DrawerStack.Screen
                 name="HoT"
                 component={HoTMetaEvents}

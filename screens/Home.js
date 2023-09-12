@@ -20,7 +20,7 @@ export default Home = props => {
             resizeMode='stretch'
         >
             <View style={styles.screen}>
-                <View style={styles.dailies}>
+                {/* <View style={styles.dailies}>
                     <GwButton
                         background={require('../assets/todaybutton.png')}
                         onPress={() => props.navigation.navigate("Today")}
@@ -29,7 +29,7 @@ export default Home = props => {
                         background={require('../assets/tomorrowbutton.png')}
                         onPress={() => props.navigation.navigate("Tomorrow")}
                     />
-                </View>
+                </View> */}
                 <GwButton
                     background={require('../assets/bossbutton.png')}
                     onPress={() => props.navigation.navigate("Bosses")}

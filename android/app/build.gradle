@@ -169,6 +169,12 @@ android {
     }
 
     signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
         release {
             if (project.hasProperty('GW2L_UPLOAD_STORE_FILE')) {
                 storeFile file(GW2L_UPLOAD_STORE_FILE)
@@ -231,14 +237,6 @@ android {
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
             include (*reactNativeArchitectures())
-        }
-    }
-    signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
         }
     }
     buildTypes {
