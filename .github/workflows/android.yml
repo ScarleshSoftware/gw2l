@@ -29,20 +29,33 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Generating keystore file
-        run: |
-          cd android
-          echo "Printing encoded key"
-          echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d
-          ls app
-          echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > app/EternalAlchemy.keystore
-      - name: Build Android Release
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleRelease
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        # ID used to access action output
+        id: sign_app
+        with:
+          releaseDirectory: android/app/build/outputs/apk/release/
+          signingKeyBase64: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
+          alias: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
+          keyPassword: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "30.0.2"
+      # - name: Generating keystore file
+      #   run: |
+      #     cd android
+      #     echo "Printing encoded key"
+      #     echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d
+      #     ls app
+      #     echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > app/EternalAlchemy.keystore
+      # - name: Build Android Release
+      #   run: |
+      #     cd android
+      #     chmod +x gradlew
+      #     ./gradlew assembleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
