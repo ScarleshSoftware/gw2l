@@ -35,7 +35,7 @@ jobs:
         id: sign_app
         with:
           releaseDirectory: android/app/build/outputs/apk/release/
-          signingKeyBase64: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
+          signingKeyBase64: ${{ secrets.ANDROID_STORE_KEY }}
           alias: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
           keyPassword: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
