@@ -38,7 +38,8 @@ jobs:
             android
       - name: Check dir structure
         run: |
-          ls -la app/build/outputs
+          ls -la app
+          ls -la app/build
           pwd
       # - name: Install npm dependencies
       #   run: |
