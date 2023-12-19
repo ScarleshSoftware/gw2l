@@ -35,7 +35,7 @@ jobs:
           repository: ${{ github.repository }}
           sparse-checkout: |
             android
-      - name: Check dir structure
+      - name: Create release artifact folder
         run: |
           mkdir -p android/app/build/outputs/apk/release
       - name: Install npm dependencies
