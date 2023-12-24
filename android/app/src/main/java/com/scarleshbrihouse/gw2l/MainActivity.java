@@ -1,4 +1,4 @@
-package com.gw2l;
+package com.scarleshbrihouse.slashouse.gw2tool;
 
 import android.os.Build;
 import android.os.Bundle;

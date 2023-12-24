@@ -10,7 +10,7 @@ on:
       - master
       - develop
 env:
-  GW2L_UPLOAD_STORE_FILE: 'app/EternalAlchemy.keystore'
+  GW2L_UPLOAD_STORE_FILE: 'EternalAlchemy.keystore'
   GW2L_UPLOAD_STORE_PASSWORD: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
   GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
   GW2L_UPLOAD_KEY_PASSWORD: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
@@ -46,9 +46,7 @@ jobs:
           echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > android/app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleRelease
+          make release
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:

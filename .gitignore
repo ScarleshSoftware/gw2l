@@ -55,7 +55,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 !android/gradle/wrapper/gradle-wrapper.jar
 local.properties
@@ -73,6 +72,9 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+*.jks
+*.der
+*.pem
 !debug.keystore
 
 # Bundle artifacts
@@ -93,5 +95,5 @@ dist/
 .gradle
 
 # Ignore Gradle build output directory
-build
 android.bkp/
+android/key.properties

@@ -11,6 +11,8 @@ Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope LocalMachine
 ```
 - For VSCode: `Ctrl + P` and write ``ext install npm script runner`` otherwise it won't be able to use npm in its integrated terminal
 - Install expo globally `npm install -g react-native-cli`
+
+
 #### Other pre-requisites (Linux)
 ```sh
 sudo apt update && sudo apt install -y ninja-build default-jre default-jdk

@@ -75,19 +75,24 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.gw2l"
+    namespace "com.scarleshbrihouse.slashouse.gw2tool"
     defaultConfig {
-        applicationId "com.gw2l"
+        applicationId "com.scarleshbrihouse.slashouse.gw2tool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "2.0.1"
 
         buildConfigField("boolean", "REACT_NATIVE_UNSTABLE_USE_RUNTIME_SCHEDULER_ALWAYS", (findProperty("reactNative.unstable_useRuntimeSchedulerAlways") ?: true).toString())
     }
@@ -99,17 +104,14 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('GW2L_UPLOAD_STORE_FILE')) {
-                storeFile file(GW2L_UPLOAD_STORE_FILE)
-                storePassword GW2L_UPLOAD_STORE_PASSWORD
-                keyAlias GW2L_UPLOAD_KEY_ALIAS
-                keyPassword GW2L_UPLOAD_KEY_PASSWORD
-            } else {
-                storeFile file(System.env.GW2L_UPLOAD_STORE_FILE)
-                storePassword System.env.GW2L_UPLOAD_STORE_PASSWORD
-                keyAlias System.env.GW2L_UPLOAD_KEY_ALIAS
-                keyPassword System.env.GW2L_UPLOAD_KEY_PASSWORD
-            }
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+                // storeFile file(String.valueOf(System.getenv("GW2L_UPLOAD_STORE_FILE")))
+                // storePassword System.getenv("GW2L_UPLOAD_STORE_PASSWORD")
+                // keyAlias System.getenv("GW2L_UPLOAD_KEY_ALIAS")
+                // keyPassword System.getenv("GW2L_UPLOAD_KEY_PASSWORD")
         }
     }
     buildTypes {
@@ -119,7 +121,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
