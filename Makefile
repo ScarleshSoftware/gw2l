@@ -5,9 +5,10 @@ dependencies:
 	npm install
 
 env:
-	[[ -f .env ]] || set -o allexport; source .env; set +o allexport
+	[[ -f .env ]] && set -o allexport; source .env; set +o allexport
 
 release: env
+	chmod +x ./build_tools/build_release.sh
 	./build_tools/build_release.sh
 
 docker_build: env
