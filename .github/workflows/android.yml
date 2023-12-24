@@ -46,7 +46,7 @@ jobs:
           echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > android/app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
-          ls -la
+          ls -la build_tools
           make docker_build
       - name: Upload Artifact
         uses: actions/upload-artifact@v1

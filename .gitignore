@@ -97,3 +97,4 @@ dist/
 # Ignore Gradle build output directory
 android.bkp/
 android/key.properties
+REMINDME.md
