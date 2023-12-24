@@ -30,12 +30,11 @@ jobs:
     # needs: install-and-test
     runs-on: ubuntu-latest
     steps: 
-
       - uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
-          sparse-checkout: |
-            android
+          # sparse-checkout: |
+          #   android
       - name: Create release artifact folder
         run: |
           mkdir -p ${{env.BUILD_APP_FOLDER}}
@@ -47,9 +46,8 @@ jobs:
           echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > android/app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
-          ls -l
-          ls -l build_tools
-          make release
+          ls -la
+          make docker_build
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:

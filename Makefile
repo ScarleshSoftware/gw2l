@@ -9,3 +9,6 @@ env:
 
 release: env
 	./build_tools/build_release.sh
+
+docker_build: env
+	./build_tools/docker_build.sh

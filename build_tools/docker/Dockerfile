@@ -1,35 +1,62 @@
-FROM --platform=linux/amd64 openjdk:17-slim
+FROM ubuntu
+WORKDIR /SHELL ["/bin/bash", "-c"]
 
-ENV ANDROID_SDK_TOOLS 9477386
-ENV ANDROID_SDK_URL https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
-ENV ANDROID_BUILD_TOOLS_VERSION 33.0.0
-ENV ANDROID_HOME /usr/local/android-sdk-linux
-ENV ANDROID_VERSION 33
-ENV PATH $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/bin# Set user to root for necessary permissions
-USER root
-# Install required packages
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends unzip curl && \
-    mkdir "$ANDROID_HOME" .android && \
-    cd "$ANDROID_HOME" && \
-    curl -o sdk.zip $ANDROID_SDK_URL && \
-    unzip sdk.zip && \
-    rm sdk.zip && \
-# Download Android SDK
-    yes | sdkmanager --licenses --sdk_root=$ANDROID_HOME && \
-    sdkmanager --update --sdk_root=$ANDROID_HOME && \
-    sdkmanager --sdk_root=$ANDROID_HOME "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
-    "platforms;android-${ANDROID_VERSION}" \
-    "platform-tools" \
-    "extras;android;m2repository" \
-    "extras;google;m2repository" && \
-# Install Fastlane
-    apt-get install --no-install-recommends -y --allow-unauthenticated build-essential git ruby-full && \
-    gem install rake && \
-    gem install fastlane && \
-    gem install bundler && \
-    gem install screengrab && \
-# Clean up
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    apt-get autoremove -y && \
-    apt-get clean
+RUN apt update && apt install -y \
+    openjdk-8-jdk \
+    vim \
+    git \
+    unzip \
+    libglu1 \
+    libpulse-dev \
+    libasound2 \
+    libc6 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxi6 \
+    libxtst6 \
+    libnss3 \
+    wget
+
+ARG GRADLE_VERSION=5.4.1
+ARG ANDROID_API_LEVEL=28
+ARG ANDROID_BUILD_TOOLS_LEVEL=28.0.3
+ARG EMULATOR_NAME='test'
+
+RUN wget -q 'https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip' -P /tmp \
+    && unzip -d /opt/android /tmp/sdk-tools-linux-4333796.zip \
+    && yes Y | /opt/android/tools/bin/sdkmanager \
+        --install "platform-tools" "system-images;android-${ANDROID_API_LEVEL};google_apis;x86" \
+        "platforms;android-${ANDROID_API_LEVEL}" "build-tools;${ANDROID_BUILD_TOOLS_LEVEL}" "emulator" \
+    && yes Y | /opt/android/tools/bin/sdkmanager --licenses
+
+RUN wget -q https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
+    && unzip -d /opt/gradle /tmp/gradle-${GRADLE_VERSION}-bin.zip \
+    && mkdir /opt/gradlew \
+    && /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle wrapper \
+        --gradle-version ${GRADLE_VERSION} \
+        --distribution-type all \
+        -p /opt/gradlew  \
+    && /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle wrapper \
+        -p /opt/gradlew
+
+ARG NODE_MAJOR=21
+RUN apt-get update \
+    && apt-get install -y ca-certificates curl gnupg openjdk-11-jdk \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
+    && apt-get install make nodejs -y
+
+ENV GRADLE_HOME=/opt/gradle/gradle-$GRADLE_VERSION
+ENV ANDROID_HOME=/opt/android
+ENV PATH "$PATH:$GRADLE_HOME/bin:/opt/gradlew:$ANDROID_HOME/emulator:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
+ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib"
+COPY --chmod=0755 build.sh /
+
+WORKDIR /build
+ENTRYPOINT [ "/bin/bash" ]
