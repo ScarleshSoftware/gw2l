@@ -8,4 +8,4 @@ env:
 	set -o allexport; source .env; set +o allexport
 
 release: env
-	./build/build_release.sh
+	./build_tools/build_release.sh
