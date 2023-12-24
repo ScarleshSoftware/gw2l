@@ -8,7 +8,7 @@ env:
 	[[ -f .env ]] && set -o allexport; source .env; set +o allexport
 
 release: env
-	chmod +x ./build_tools/build_release.sh
+	chmod +x build_tools\docker_build.sh
 	./build_tools/build_release.sh
 
 docker_build: env
