@@ -10,6 +10,7 @@ on:
       - master
       - develop
 env:
+  BUILD_APP_FOLDER: 'android/app/build/outputs/apk/release'
   GW2L_UPLOAD_STORE_FILE: 'EternalAlchemy.keystore'
   GW2L_UPLOAD_STORE_PASSWORD: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
   GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
@@ -37,7 +38,7 @@ jobs:
             android
       - name: Create release artifact folder
         run: |
-          mkdir -p android/app/build/outputs/apk/release
+          mkdir -p ${{env.BUILD_APP_FOLDER}}
       - name: Install npm dependencies
         run: |
           npm install
@@ -46,9 +47,11 @@ jobs:
           echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > android/app/EternalAlchemy.keystore
       - name: Build Android Release
         run: |
+          ls -l
+          ls -l build_tools
           make release
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: app-release.apk
-          path: android/app/build/outputs/apk/release
+          path: ${{env.BUILD_APP_FOLDER}}
