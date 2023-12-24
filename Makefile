@@ -5,7 +5,7 @@ dependencies:
 	npm install
 
 env:
-	[[ -f .env ]] && (set -o allexport; source .env; set +o allexport)
+	./build_tools/set_env.sh
 
 release: env
 	./build_tools/build_release.sh
