@@ -29,12 +29,12 @@ jobs:
       - name: Create release artifact folder
         run: |
           mkdir -p ${{env.BUILD_APP_FOLDER}}
-      - name: Install npm dependencies
-        run: |
-          npm install
       - name: Generating keystore file
         run: |
-          echo ${{ secrets.ANDROID_STORE_KEY }} | base64 -d > android/app/Gw2l.jks
+          base64 --version
+          docker run -e ANDROID_STORE_KEY="${{ secrets.ANDROID_STORE_KEY }}" --name store_key_converter decoder64
+          docker cp store_key_converter:/tmp/Gw2l.jks android/app/Gw2l.jks
+          docker rm store_key_converter
       - name: Build Android Release
         run: |
           make docker_build
