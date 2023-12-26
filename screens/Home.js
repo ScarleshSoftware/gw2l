@@ -46,6 +46,10 @@ export default Home = props => {
                     background={require('../assets/eodbutton.png')}
                     onPress={() => props.navigation.navigate("EoD")}
                 />
+                <GwButton
+                    background={require('../assets/sotobutton.png')}
+                    onPress={() => props.navigation.navigate("SotO")}
+                />
             </View>
             {nextDayState && <Text style={styles.dayState}>Next: {nextDayState.title} @ {nextDayState.time}</Text>}
         </ImageBackground>

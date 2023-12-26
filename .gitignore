@@ -98,3 +98,4 @@ dist/
 android.bkp/
 android/key.properties
 REMINDME.md
+.venv/

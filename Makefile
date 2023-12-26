@@ -12,3 +12,6 @@ release: env
 
 docker_build: env
 	./build_tools/docker_build.sh
+
+dev_build:
+	npx expo run:android
