@@ -1,5 +1,5 @@
 FROM ubuntu
-WORKDIR /SHELL ["/bin/bash", "-c"]
+SHELL [ "/bin/bash" ]
 
 RUN apt update && apt install -y \
     openjdk-8-jdk \
