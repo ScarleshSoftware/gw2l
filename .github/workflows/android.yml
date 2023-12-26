@@ -10,7 +10,7 @@ on:
       - master
       - develop
 env:
-  BUILD_APP_FOLDER: 'android/app/build/outputs/apk/release'
+  BUILD_APP_FOLDER: 'android/app/build/outputs/bundle/release'
   GW2L_UPLOAD_STORE_FILE: 'Gw2l.jks'
   GW2L_UPLOAD_STORE_PASSWORD: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
   GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
@@ -47,5 +47,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: app-release.apk
-          path: ${{env.BUILD_APP_FOLDER}}
+          name: app-release.aab
+          path: ./
