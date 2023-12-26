@@ -1,7 +1,6 @@
 FROM ubuntu
-SHELL [ "/bin/bash" ]
 
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     openjdk-8-jdk \
     vim \
     git \
