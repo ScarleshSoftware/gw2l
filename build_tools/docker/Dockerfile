@@ -27,19 +27,19 @@ ARG ANDROID_BUILD_TOOLS_LEVEL=28.0.3
 ARG EMULATOR_NAME='test'
 
 RUN wget -q 'https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip' -P /tmp \
-    && unzip -d /opt/android /tmp/sdk-tools-linux-4333796.zip \
+    && unzip -qq -d /opt/android /tmp/sdk-tools-linux-4333796.zip \
     && yes Y | /opt/android/tools/bin/sdkmanager \
         --install "platform-tools" "system-images;android-${ANDROID_API_LEVEL};google_apis;x86" \
-        "platforms;android-${ANDROID_API_LEVEL}" "build-tools;${ANDROID_BUILD_TOOLS_LEVEL}" "emulator" \
-    && yes Y | /opt/android/tools/bin/sdkmanager --licenses
+        "platforms;android-${ANDROID_API_LEVEL}" "build-tools;${ANDROID_BUILD_TOOLS_LEVEL}" "emulator" > /dev/null 2>&1 \
+    && yes Y | /opt/android/tools/bin/sdkmanager --licenses > /dev/null 2>&1
 
 RUN wget -q https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
-    && unzip -d /opt/gradle /tmp/gradle-${GRADLE_VERSION}-bin.zip \
+    && unzip -qq -d /opt/gradle /tmp/gradle-${GRADLE_VERSION}-bin.zip \
     && mkdir /opt/gradlew \
     && /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle wrapper \
         --gradle-version ${GRADLE_VERSION} \
         --distribution-type all \
-        -p /opt/gradlew  \
+        -p /opt/gradlew \
     && /opt/gradle/gradle-${GRADLE_VERSION}/bin/gradle wrapper \
         -p /opt/gradlew
 
