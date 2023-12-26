@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.scarleshbrihouse.slashouse.gw2tool",
-      "versionCode": 101,
+      "versionCode": 102,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

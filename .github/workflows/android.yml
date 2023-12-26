@@ -44,6 +44,8 @@ jobs:
       - name: Build Android Release
         run: |
           make docker_build
+        env: 
+          custom_tag: ${{ github.run_number }}
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
