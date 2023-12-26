@@ -53,5 +53,6 @@ ENV GRADLE_HOME=/opt/gradle/gradle-$GRADLE_VERSION
 ENV ANDROID_HOME=/opt/android
 ENV PATH "$PATH:$GRADLE_HOME/bin:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools"
 COPY --chmod=0755 build_tools/docker/build.sh /
+COPY . /build
 
 ENTRYPOINT [ "/bin/bash" ]

@@ -2,5 +2,5 @@
 
 pushd android
 ./gradlew --stop
-./gradlew bundleRelease
+./gradlew bundleRelease --stacktrace
 popd
