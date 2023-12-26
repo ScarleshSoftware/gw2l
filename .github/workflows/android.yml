@@ -35,6 +35,12 @@ jobs:
           docker run -e ANDROID_STORE_KEY="${{ secrets.ANDROID_STORE_KEY }}" --name store_key_converter decoder64
           docker cp store_key_converter:/tmp/Gw2l.jks android/app/Gw2l.jks
           docker rm store_key_converter
+      - name: Creating key.properties
+        run: |
+          echo "storeFile=${{ env.GW2L_UPLOAD_STORE_FILE }}" > android/key.properties
+          echo "storePassword=${{ env.GW2L_UPLOAD_STORE_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ env.GW2L_UPLOAD_KEY_ALIAS }}" >> android/key.properties
+          echo "keyPassword=${{ env.GW2L_UPLOAD_KEY_PASSWORD }}" >> android/key.properties
       - name: Build Android Release
         run: |
           make docker_build

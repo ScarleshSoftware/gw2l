@@ -50,6 +50,6 @@
     "@babel/core": "^7.20.0"
   },
   "private": true,
-  "name": "gw2l",
+  "name": "gw2tool",
   "version": "1.0.0"
 }

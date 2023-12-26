@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "gw2l",
-    "slug": "gw2l",
+    "name": "gw2tool",
+    "slug": "gw2tool",
     "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
