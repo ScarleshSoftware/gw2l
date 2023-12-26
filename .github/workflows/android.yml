@@ -31,7 +31,7 @@ jobs:
           mkdir -p ${{env.BUILD_APP_FOLDER}}
       - name: Generating keystore file
         run: |
-          base64 --version
+          docker build build_tools/docker -f build_tools/docker/decoder.Dockerfile -t decoder64
           docker run -e ANDROID_STORE_KEY="${{ secrets.ANDROID_STORE_KEY }}" --name store_key_converter decoder64
           docker cp store_key_converter:/tmp/Gw2l.jks android/app/Gw2l.jks
           docker rm store_key_converter
