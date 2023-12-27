@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Image, Animated } from "react-native";
+import { Image } from "react-native";
 import TabLabel from '../components/TabLabel';
 import Dailies from "../screens/Dailies";
 import navStyles from "./CommonStyles";

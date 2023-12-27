@@ -1,0 +1,53 @@
+name: react-native-android-build-apk
+run-name: Building APK
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+env:
+  BUILD_APP_FOLDER: 'android/app/build/outputs/bundle/release'
+  GW2L_UPLOAD_STORE_FILE: 'Gw2l.jks'
+  GW2L_UPLOAD_STORE_PASSWORD: ${{ secrets.GW2L_UPLOAD_STORE_PASSWORD }}
+  GW2L_UPLOAD_KEY_ALIAS: ${{ secrets.GW2L_UPLOAD_KEY_ALIAS }}
+  GW2L_UPLOAD_KEY_PASSWORD: ${{ secrets.GW2L_UPLOAD_KEY_PASSWORD }}
+jobs:
+  build-android:
+    defaults:
+      run:
+        shell: bash
+    # needs: install-and-test
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+      - name: Create release artifact folder
+        run: |
+          mkdir -p ${{env.BUILD_APP_FOLDER}}
+      - name: Generating keystore file
+        run: |
+          docker build build_tools/docker -f build_tools/docker/decoder.Dockerfile -t decoder64
+          docker run -e ANDROID_STORE_KEY="${{ secrets.ANDROID_STORE_KEY }}" --name store_key_converter decoder64
+          docker cp store_key_converter:/tmp/Gw2l.jks android/app/Gw2l.jks
+          docker rm store_key_converter
+      - name: Creating key.properties
+        run: |
+          echo "storeFile=${{ env.GW2L_UPLOAD_STORE_FILE }}" > android/key.properties
+          echo "storePassword=${{ env.GW2L_UPLOAD_STORE_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ env.GW2L_UPLOAD_KEY_ALIAS }}" >> android/key.properties
+          echo "keyPassword=${{ env.GW2L_UPLOAD_KEY_PASSWORD }}" >> android/key.properties
+      - name: Build Android Release
+        run: |
+          make docker_build
+        env: 
+          custom_tag: ${{ github.run_number }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.aab
+          path: ./

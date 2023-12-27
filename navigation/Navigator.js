@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import MetaEvents from "../screens/HoTMetaEvents";
-import Tomorries from "../screens/Tomorries";
 import DrawerNavigator from './SideMenu';
 
 

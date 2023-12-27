@@ -5,7 +5,7 @@
 
 ----
 - Download Node.js from: https://nodejs.org/en/
-- On windows, set the execution policy from PS as an Administrator and run:
+- On Windows, set the execution policy from PS as an Administrator and run:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope LocalMachine
 ```
@@ -13,11 +13,25 @@ Set-ExecutionPolicy -ExecutionPolicy AllSigned -Scope LocalMachine
 - Install expo globally `npm install -g react-native-cli`
 
 
+#### Other pre-requisites (Linux)
+```sh
+sudo apt update && sudo apt install -y ninja-build default-jre default-jdk
+```
+
 ## Dev
-Create a `local.properties` under the android folder
+Create a [local.properties](android\local.properties) under the android folder
+
+Windows:
 ```.properties
 sdk.dir = C:\\Users\\USERNAME\\AppData\\Local\\Android\\sdk
-ndk.dir = C:\\Users\\USERNAME\\AppData\\Local\\Android\\sdk\\ndk\\NDS_VERSION
+# Optional
+ndk.dir = C:\\Users\\USERNAME\\AppData\\Local\\Android\\sdk\\ndk\\<NDK_VERSION>
+```
+Linux:
+```.properties
+sdk.dir = ~/Android/sdk/Sdk/
+# Optional
+ndk.dir = ~/Android/sdk/Sdk/ndk/<NDK_VERSION>
 ```
 ```sh
 npm run android
@@ -28,8 +42,11 @@ npm run web
 ## Build
 
 ```sh
+set -o allexport; source .env; set +o allexport
 cd android
 ./gradlew bundleRelease
+# or
+npx react-native build-android --mode=release
 ```
 The generated `aab` can be found in `android/app/build/outputs/bundle/release/app-release.aab`.
 

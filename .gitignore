@@ -55,9 +55,8 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
-.gradle
+!android/gradle/wrapper/gradle-wrapper.jar
 local.properties
 *.iml
 *.hprof
@@ -73,6 +72,9 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+*.jks
+*.der
+*.pem
 !debug.keystore
 
 # Bundle artifacts
@@ -87,3 +89,13 @@ web-build/
 dist/
 
 # @end expo-cli
+
+.env
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+android.bkp/
+android/key.properties
+REMINDME.md
+.venv/

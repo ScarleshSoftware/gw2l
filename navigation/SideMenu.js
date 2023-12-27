@@ -1,7 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { AntDesign } from '@expo/vector-icons'; 
 import Colors from "../constants/Colors";
-import navStyles from "./CommonStyles";
 import Home from '../screens/Home';
 import HoTMetaEvents from '../screens/HoTMetaEvents';
 import PofMetaEvents from '../screens/PofMetaEvents';
@@ -10,14 +8,13 @@ import IbsMetaEvents from '../screens/IbsMetaEvents';
 import EoDMetaEvents from '../screens/EoDMetaEvents';
 import TomorrowPageNavigator from './TomorrowDailiesNavigation';
 import TodayPageNavigator from './TodayDailiesNavigation';
-import { Image } from 'react-native';
 import DrawerCloset from '../components/DrawerCloset';
+import SotOMetaEvents from '../screens/SotOMetaEvents';
 
 const DrawerStack = createDrawerNavigator();
 export default function DrawerNavigator() {
     return (
         <DrawerStack.Navigator
-            useLegacyImplementation
             initialRouteName="Home"
             screenOptions={{
                 drawerStyle: {
@@ -38,7 +35,7 @@ export default function DrawerNavigator() {
                     tabBarColor: Colors.blue,
                 }}
             />
-            <DrawerStack.Screen
+            {/* <DrawerStack.Screen
                 name="Today"
                 component={TodayPageNavigator}
                 options={{
@@ -55,7 +52,7 @@ export default function DrawerNavigator() {
                         return <DrawerCloset text="Tomorries" icon={require('../assets/daily_bottom.png')}/>
                     }
                 }}
-            />
+            /> */}
             <DrawerStack.Screen
                 name="HoT"
                 component={HoTMetaEvents}
@@ -92,6 +89,16 @@ export default function DrawerNavigator() {
                 options={{
                     drawerLabel: (labelInfo) => {
                         return <DrawerCloset text="End of Dragons" icon={require('../assets/eod-logo.png')}/>
+                    },
+                    tabBarColor: Colors.blue
+                }}
+            />
+            <DrawerStack.Screen
+                name="SotO"
+                component={SotOMetaEvents}
+                options={{
+                    drawerLabel: (labelInfo) => {
+                        return <DrawerCloset text="Secrets of the Obscure" icon={require('../assets/soto-logo.png')}/>
                     },
                     tabBarColor: Colors.blue
                 }}
