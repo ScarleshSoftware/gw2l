@@ -24,3 +24,4 @@ jobs:
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: production
           status: inProgress
+          userFraction: 1.0
