@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checking if the aab exists
         run: |
+          ls -la
+          find . -name *.aab
           ls -l android/app/build/outputs/bundle/release/app-release.aab
       - name: Upload Android Release to Play Store
         uses: r0adkll/upload-google-play@v1
