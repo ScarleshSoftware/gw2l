@@ -1,0 +1,26 @@
+name: push-to-play-console
+run-name: Publish to Play Console
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - add-release-pipeline
+    tags:        
+      - '*'
+env:
+  PUBLISH_KEY_PLAYSTORE: ${{ secrets.PUBLISH_KEY_PLAYSTORE }}
+jobs:
+  push-android:
+    defaults:
+      run:
+        shell: bash
+    # needs: install-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ env.PUBLISH_KEY_PLAYSTORE }}
+          packageName: com.scarleshbrihouse.gw2l
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: production
+          status: inProgress
