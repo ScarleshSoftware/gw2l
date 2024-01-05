@@ -17,6 +17,9 @@ jobs:
     # needs: install-and-test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
       - name: Checking if the aab exists
         run: |
           ls -la
