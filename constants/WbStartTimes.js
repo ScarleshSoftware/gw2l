@@ -1,49 +1,69 @@
-import eventCreator from '../helpers/eventCreator'
+import eventCreator from '../helpers/eventCreator';
+import dst_delta from './IsDST';
+
 const moment = require('moment');
 
 const firstSpawns = [
+    // Shatterer
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
     }),
+    //Jungle Wurm
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
         minutes: 15,
     }),
+    // Modniir Ulgoth
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
         minutes: 30,
     }),
+    // Shadow Behemoth
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
         minutes: 45,
     }),
+    // Golem Mark II
     moment.duration({
-        hours: 2,
+        hours: 2 + dst_delta,
     }),
+    // Svanir Shaman
     moment.duration({
+        hours: dst_delta,
         minutes: 15,
     }),
+    // Claw of Jormag
     moment.duration({
-        hours: 2,
+        hours: 2 + dst_delta,
         minutes: 30,
     }),
+    // Fire Elemental
     moment.duration({
-        minutes: 30,
+        hours: dst_delta,
+        minutes: 45,
     }),
+    // Taidha Covington
     moment.duration({
+        hours: dst_delta,
         minutes: 0,
     }),
+    // Megadestroyer
     moment.duration({
+        hours: dst_delta,
         minutes: 30,
     }),
+    // Tequatl the Sunless
     moment.duration({
+        hours: dst_delta,
         minutes: 0,
     }),
+    // Triple Trouble
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
     }),
+    // Karka Queen
     moment.duration({
-        hours: 2,
+        hours: 2 + dst_delta,
     }),
 ]
 

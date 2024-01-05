@@ -41,7 +41,7 @@ export default WorldBosses = props => {
 
 const styles = StyleSheet.create({
     flatlist: {
-        marginTop: 50,
+        
         flex: 1,
         alignContent: 'center',
         flexDirection: 'row',

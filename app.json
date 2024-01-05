@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "gw2l",
-    "slug": "gw2l",
-    "version": "2.0.0",
+    "name": "gw2tool",
+    "slug": "gw2tool",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,13 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.scarleshbrihouse.gw2l",
+      "bundleIdentifier": "com.scarleshbrihouse.slashouse.gw2tool",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.scarleshbrihouse.gw2l",
-      "versionCode": 1,
+      "package": "com.scarleshbrihouse.slashouse.gw2tool",
+      "versionCode": 102,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"

@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Image, Text, StyleSheet, ImageBackground, Appearance } from "react-native";
+import Colors from '../../constants/Colors';
 
 export default StandardRow = props => {
     const details = props.content
+    const image_path = Appearance.getColorScheme() === 'dark' ? require('../../assets/dark_theme_icons/gw2.png') : require('../../assets/gw2.png');
     return (
         <ImageBackground
             style={styles.image}
-            source={require('../../assets/gw2.png')}
+            source={image_path}
         >
             <View style={styles.screen}>
                 <Image source={{ uri: details.icon }} style={styles.icon} />
@@ -41,12 +43,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         fontWeight: 'bold',
-        color: 'blue'
+        color: Colors.dailyText
     },
     subtitle: {
         textAlign: 'center',
         fontSize: 11,
-        color: 'blue'
+        color: Colors.dailySubtext
     },
     image: {
         resizeMode: "cover",

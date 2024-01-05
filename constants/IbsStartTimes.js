@@ -1,14 +1,18 @@
 import eventCreator from '../helpers/eventCreator';
+import dst_delta from './IsDST';
+
 const moment = require('moment');
+
 const firstSpawns = [
     moment.duration({
+        hours: dst_delta,
         minutes: 10,
     }),
     moment.duration({
-        hours: 0,
+        hours: dst_delta,
     }),
     moment.duration({
-        hours: 1,
+        hours: 1 + dst_delta,
     }),
 ]
 

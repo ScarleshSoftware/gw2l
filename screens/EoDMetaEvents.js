@@ -42,7 +42,6 @@ export default EoDMetaEvents = props => {
 
 const styles = StyleSheet.create({
     flatlist: {
-        marginTop: 50,
         flex: 1,
         alignContent: 'center',
         flexDirection: 'row',
