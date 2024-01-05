@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - add-release-pipeline
   pull_request:
     branches:
       - main
@@ -51,3 +52,12 @@ jobs:
         with:
           name: app-release.aab
           path: ./
+      - name: Upload Android Release to Play Store
+        if: github.ref == 'refs/heads/master'
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ env.PUBLISH_KEY_PLAYSTORE }}
+          packageName: com.scarleshbrihouse.gw2l
+          releaseFiles: ${{ env.BUILD_APP_FOLDER }}/app-release.aab
+          track: production
+          status: draft

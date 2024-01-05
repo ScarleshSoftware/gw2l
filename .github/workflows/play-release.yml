@@ -3,8 +3,6 @@ run-name: Publish to Play Console
 on:
   workflow_dispatch:
   push:
-    branches:
-      - add-release-pipeline
     tags:        
       - '*'
 env:
