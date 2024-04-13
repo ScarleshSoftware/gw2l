@@ -1,0 +1,30 @@
+name: bump-android-versions
+run-name: Bump android versions
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+env:
+  BOT_EMAIL_CREDS: ${{ secrets.BOT_EMAIL_CREDS }}
+jobs:
+  bump-version:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit changes
+        run: |
+          sudo apt-get install -y python3.10 jq
+
+          python3.10 build_tools/bump-version.py
+          git config --global user.name 'Auto Committer'
+          git config --global user.email '${{ env.BOT_EMAIL_CREDS }}'
+          git commit -am "Bumped version"
+          git push --set-upstream origin test_bump
+          
+          TAG=$(cat app.json | jq .expo.version -r)
+          git tag $TAG
+          git push origin --tags
